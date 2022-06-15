@@ -52,7 +52,26 @@ export const generatePassword = (lengthPassword, strategyTitle) => {
             if (password.match(regPasswordOneLetterOneNumber)) {
                 return password;
             } else {
-                return generatePassword(lengthPassword, strategyTitle);
+                const arrPassword = password.split('');
+                const checkPassword = [...arrPassword];
+                const finalPassword = [...arrPassword];
+
+                const checkLetter = _.intersection(checkPassword, arrLetter);
+
+                if(!checkLetter.length) {
+                    const changeIndex = indexGenerator(arrPassword.length)
+                    finalPassword[changeIndex] = arrLetter[indexGenerator(arrLetter.length)];
+                    arrPassword.splice(1, changeIndex);
+                }
+
+                const checkNumbers = _.intersection(checkPassword, arrNumbers);
+
+                if(!checkNumbers.length) {
+                    const changeIndex = indexGenerator(arrPassword.length);
+                    finalPassword[changeIndex] = arrNumbers[indexGenerator(arrNumbers.length)]
+                    arrPassword.splice(1, changeIndex);
+                }
+                return finalPassword.join('');
             }
         }
         case 'oneLetterOneNumberOneSymbol': {
