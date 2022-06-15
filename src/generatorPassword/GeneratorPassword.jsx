@@ -18,7 +18,8 @@ export const GeneratorPassword = ({lengthPassword, strategyTitle}) => {
                 onClick={setPasswordHandler}>Generate password</button>
             <div style={{
                 fontWeight: 600,
-                fontSize: '24px'
+                fontSize: '24px',
+                letterSpacing:'2px'
             }}>
                 {password}
             </div>
