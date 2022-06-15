@@ -17,10 +17,10 @@ export const numberGenerator = () => Math.floor(Math.random() * 10);
 export const indexGenerator = (length) => Math.floor(Math.random() * length);
 
 
-export const regPasswordOneLetterOneNumber = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-export const regPasswordOneLetterOneNumberOneSymbol = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-export const regPasswordOneLetterOneUpperLetterOneNumber = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-export const regPasswordOneLetterOneUpperLetterOneNumberOneSymbol = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+export const regPasswordOneLetterOneNumber = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{}$/;
+export const regPasswordOneLetterOneNumberOneSymbol = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{}$/;
+export const regPasswordOneLetterOneUpperLetterOneNumber = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{}$/;
+export const regPasswordOneLetterOneUpperLetterOneNumberOneSymbol = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{}$/;
 
 export const getRandomIndexStrategy = (strategies) => Math.floor(Math.random() * strategies.length);
 

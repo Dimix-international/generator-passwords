@@ -5,6 +5,12 @@ import './generator.css';
 
 export const GeneratorComponent = () => {
     const [strategy, setStrategy] = useState('oneLetterOneUpperLetterOneNumber');
+    const [passwordLength, setPasswordLength] = useState(8);
+
+    const setPasswordLengthHandler = (value) => {
+        if(value < 8 || value > 99) return;
+        setPasswordLength(value);
+    }
 
     return (
         <div className={'wrapper'} style={{padding: '20px'}}>
@@ -54,9 +60,23 @@ export const GeneratorComponent = () => {
                     />
                     One letter one number one upper letter one symbol
                 </label>
+                <div>
+                    <label htmlFor={'passwordLength'}>
+                        Password length
+                    </label>
+                    <input
+                        style={{
+                            marginLeft: '5px'
+                        }}
+                        id={'passwordLength'}
+                        type="number"
+                        value={passwordLength}
+                        onChange={(e) => setPasswordLengthHandler(+e.target.value)}
+                    />
+                </div>
             </div>
             <GeneratorPassword
-                lengthPassword={8}
+                lengthPassword={passwordLength}
                 strategyTitle={strategy}
             />
         </div>
