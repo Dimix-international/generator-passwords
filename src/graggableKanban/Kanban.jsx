@@ -29,10 +29,11 @@ const columnsFromBackend = {
 };
 
 const onDragEnd = (result, columns, setColumns) => {
-    if (!result.destination) return;
+    if (!result.destination) return; //ничего не передвинули
     const { source, destination } = result;
 
     if (source.droppableId !== destination.droppableId) {
+        //если перетягиваем в другую колонку
         const sourceColumn = columns[source.droppableId];
         const destColumn = columns[destination.droppableId];
         const sourceItems = [...sourceColumn.items];
@@ -51,6 +52,7 @@ const onDragEnd = (result, columns, setColumns) => {
             }
         });
     } else {
+        //работаем в той же колонки, но меняем местами таски
         const column = columns[source.droppableId];
         const copiedItems = [...column.items];
         const [removed] = copiedItems.splice(source.index, 1);
