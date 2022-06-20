@@ -24,6 +24,25 @@ export const regPasswordOneLetterOneUpperLetterOneNumberOneSymbol = /^(?=.*[a-z]
 
 export const getRandomIndexStrategy = (strategies) => Math.floor(Math.random() * strategies.length);
 
+const returnPasswordAfterWhile = (strategies, lengthPassword) => {
+    let password = '';
+    while (password.length < lengthPassword) {
+        const strategy = strategies[getRandomIndexStrategy(strategies)];
+        switch (strategy) {
+            case 'number': {
+                password += numberGenerator();
+                break;
+            }
+            case 'letter': {
+                password += lettersGenerator(false);
+                break;
+            }
+            default: password += symbolGenerator();
+        }
+    }
+    return password;
+}
+
 export const generatePassword = (lengthPassword, strategyTitle) => {
 
     const arrLetter = charsLetter.split('');
@@ -31,24 +50,11 @@ export const generatePassword = (lengthPassword, strategyTitle) => {
     const arrNumbers = charsNumbers.split('');
     const arrSymbols = charsSymbols.split('');
 
+
     switch (strategyTitle) {
         case 'oneLetterOneNumber': {
-            let password = '';
             const strategies = ['number', 'letter'];
-            while (password.length < lengthPassword) {
-                const strategy = strategies[getRandomIndexStrategy(strategies)];
-                switch (strategy) {
-                    case 'number': {
-                        password += numberGenerator();
-                        break;
-                    }
-                    case 'letter': {
-                        password += lettersGenerator(false);
-                        break;
-                    }
-                    default: password += symbolGenerator();
-                }
-            }
+            const password = returnPasswordAfterWhile(strategies, lengthPassword);
             if (password.match(regPasswordOneLetterOneNumber)) {
                 return password;
             } else {
@@ -75,22 +81,9 @@ export const generatePassword = (lengthPassword, strategyTitle) => {
             }
         }
         case 'oneLetterOneNumberOneSymbol': {
-            let password = '';
             const strategies = ['number', 'letter', 'symbol'];
-            while (password.length < lengthPassword) {
-                const strategy = strategies[getRandomIndexStrategy(strategies)];
-                switch (strategy) {
-                    case 'number': {
-                        password += numberGenerator();
-                        break;
-                    }
-                    case 'letter': {
-                        password += lettersGenerator(false);
-                        break;
-                    }
-                    default: password += symbolGenerator();
-                }
-            }
+            const password = returnPasswordAfterWhile(strategies, lengthPassword);
+
             if (password.match(regPasswordOneLetterOneNumberOneSymbol)) {
                 return password;
             } else {
@@ -126,22 +119,9 @@ export const generatePassword = (lengthPassword, strategyTitle) => {
             }
         }
         case 'oneLetterOneUpperLetterOneNumberOneSymbol': {
-            let password = '';
             const strategies = ['number', 'letter', 'symbol'];
-            while (password.length < lengthPassword) {
-                const strategy = strategies[getRandomIndexStrategy(strategies)];
-                switch (strategy) {
-                    case 'number': {
-                        password += numberGenerator();
-                        break;
-                    }
-                    case 'letter': {
-                        password += lettersGenerator(numberGenerator() >= 4);
-                        break;
-                    }
-                    default: password += symbolGenerator();
-                }
-            }
+            const password = returnPasswordAfterWhile(strategies, lengthPassword);
+
             if (password.match(regPasswordOneLetterOneUpperLetterOneNumberOneSymbol)) {
                 return password;
             } else {
@@ -160,7 +140,7 @@ export const generatePassword = (lengthPassword, strategyTitle) => {
                 const checkUpperLetter = _.intersection(checkPassword, arrUpperLetter);
 
                 if(!checkUpperLetter.length) {
-                    const changeIndex = indexGenerator(checkPassword.length);
+                    const changeIndex = indexGenerator(arrPassword.length);
                     finalPassword[changeIndex] = arrUpperLetter[indexGenerator(arrUpperLetter.length)];
                     arrPassword.splice(1, changeIndex);
                 }
@@ -185,22 +165,8 @@ export const generatePassword = (lengthPassword, strategyTitle) => {
             }
         }
         default: {
-            let password = '';
             const strategies = ['number', 'letter'];
-            while (password.length < lengthPassword) {
-                const strategy = strategies[getRandomIndexStrategy(strategies)];
-                switch (strategy) {
-                    case 'number': {
-                        password += numberGenerator();
-                        break;
-                    }
-                    case 'letter': {
-                        password += lettersGenerator(numberGenerator() >= 4);
-                        break;
-                    }
-                    default: password += symbolGenerator();
-                }
-            }
+            const password = returnPasswordAfterWhile(strategies, lengthPassword);
             if (password.match(regPasswordOneLetterOneUpperLetterOneNumber)) {
                 return password;
             } else {
